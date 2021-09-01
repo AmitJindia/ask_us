@@ -5,7 +5,7 @@ import Layout from '../Containers/Layout/Layout';
 function Routing(props) {
     return (
         <Switch>
-            <Route exact path="/" component={Layout}/>
+            <Route path="/" component={Layout}/>
         </Switch>
     );
 }
