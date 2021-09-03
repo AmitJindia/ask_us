@@ -1,4 +1,4 @@
-import { Box, Container, Paper, Typography } from '@material-ui/core';
+import { Box, Container, Paper, Typography,TextField } from '@material-ui/core';
 import React from 'react';
 
 function Home(props) {
@@ -26,6 +26,8 @@ function Home(props) {
                            <li>Project and research</li>
                            <li>Assistance</li>
                        </ul>
+                       <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+
                     </Box>
                 </Paper>
             </div>

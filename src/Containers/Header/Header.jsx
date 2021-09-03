@@ -8,7 +8,7 @@ import List from '@material-ui/core/List';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
+import { IconButton, Button } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -19,6 +19,8 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import { useStyles } from "./styles";
 import Routing from '../../Routes/Routing';
+import mainLogo from './logo.png';
+import { useHistory } from 'react-router-dom';
 
 
 
@@ -34,6 +36,11 @@ export function Header() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+    const history= useHistory();
+
+    const onClickHandler=()=>{
+        history.push("/login")
+    }
 
     return (
         <div className={classes.root}>
@@ -44,6 +51,7 @@ export function Header() {
                     [classes.appBarShift]: open,
                 })}
                 elevation={2}
+                // style={{ background: "#000" }}
             >
                 <Toolbar>
                     <IconButton
@@ -54,12 +62,19 @@ export function Header() {
                         className={clsx(classes.menuButton, {
                             [classes.hide]: open,
                         })}
+                        // style={{ color: "#fede5c" }}
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" noWrap>
-                        Askus
+                    <div style={{display:"flex",flexGrow:"1"}}>
+                    <Typography variant="h6" noWrap style={{ color: "#fff", fontFamily: "Verdana, Arial, Helvetica, sans-serif", letterSpacing: "3px" }} >
+                        ASKUS&nbsp;
                     </Typography>
+                    <Typography variant="h6" style={{ color: "#0076b5", backgroundColor: "#fff", fontFamily: "Verdana, Arial, Helvetica, sans-serif", letterSpacing: "3px" }} >
+                        ANYTIME
+                    </Typography>
+                    </div>
+                    <Button color="inherit" onClick={onClickHandler}>Login</Button>
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -92,7 +107,7 @@ export function Header() {
             </Drawer>
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-                    <Routing />
+                <Routing />
             </main>
         </div>
     );
