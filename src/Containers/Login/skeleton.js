@@ -13,6 +13,16 @@ export const form = [
     }
 ]
 
-export const data={
-    label:"Login"
+export const buttonData =
+{
+    variant: "contained",
+    label: "Login"
+
 }
+
+export const buttonData1 =
+{
+    variant: "notContained",
+    label: "Create Account"
+}
+

@@ -7,7 +7,8 @@ function Input(props) {
    switch (items?.id) {
        case "text":
            return <TextField fullWidth variant="outlined" label={items?.label} value={items?.value}/>
-   
+       case "password":
+           return <TextField fullWidth type="password" variant="outlined" label={items?.label} />
        default:
            break;
    }

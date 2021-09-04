@@ -2,11 +2,10 @@ import { Box, Container, Grid, Paper } from "@material-ui/core";
 import React from "react";
 import { useHistory } from "react-router";
 import ButtonGenerator from "../../Components/ButtonGenerator/ButtonGenerator";
-import Buttons from "../../Components/Buttons/Buttons";
 import FieldGenerator from "../../Components/FieldGenerator/FieldGenerator";
-import { form, buttonData, buttonData1 } from "./skeleton";
+import { form, buttonData } from "./skeleton";
 
-function Login(props) {
+function Register(props) {
     const history=useHistory();
     const onClickHandler=()=>{
         history.push("/register")
@@ -26,10 +25,10 @@ function Login(props) {
             <Grid
               container
               direction="row"
-              justifyContent="space-between"
+              justifyContent="flex-end"
               alignItems="center"
             >
-              <ButtonGenerator onClick={onClickHandler} data={buttonData1} />
+              
               <ButtonGenerator data={buttonData} />
             </Grid>
           </span>
@@ -39,4 +38,4 @@ function Login(props) {
   );
 }
 
-export default Login;
+export default Register;
