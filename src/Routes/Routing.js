@@ -1,7 +1,7 @@
 import React from 'react';
 import {Switch,Route} from "react-router-dom";
 import Layout from '../Containers/Layout/Layout';
-import Login from "../Containers/Login"
+import Login from "../Containers/Login/Login"
 
 function Routing(props) {
     return (
