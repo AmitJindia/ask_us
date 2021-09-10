@@ -7,11 +7,12 @@ export const formData = [
         validation: {
             required: true,
             valid: false,
-            touched: false
+            touched: false,
+            email: true
         }
     },
     {
-        id: "text",
+        id: "password",
         label: "Password",
         value: "",
         occupency: { xs: 12, md: 12 },

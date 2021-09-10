@@ -5,8 +5,22 @@ function FormValidator(form, setForm) {
         if (updatedInputDataElement.validation &&
             updatedInputDataElement.validation.required) {
             if (updatedInputDataElement.value !== "") {
-                updatedInputDataElement.validation.valid = true
-                updatedInputDataElement.validation.touched = true
+                if (updatedInputDataElement.validation.email) {
+                    var regexp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    if(regexp.test(String(updatedInputDataElement.value).toLowerCase())){
+                       
+                        updatedInputDataElement.validation.valid = true
+                        updatedInputDataElement.validation.touched = true
+                    }
+                    else{
+                        updatedInputDataElement.validation.valid = false
+                        updatedInputDataElement.validation.touched = true
+                    }
+                }
+                else {
+                    updatedInputDataElement.validation.valid = true
+                    updatedInputDataElement.validation.touched = true
+                }
             } else {
                 updatedInputDataElement.validation.valid = false
                 updatedInputDataElement.validation.touched = true

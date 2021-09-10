@@ -7,10 +7,12 @@ import { formData, buttonData, buttonData1 } from "./skeleton";
 import GoogleLogin from 'react-google-login';
 import FormValidator from "../../../Components/FormValidator/FormValidator";
 
+
 const Login=()=> {
   const [data, setData] = useState(formData);
   const [dataa, setDataa] = useState(false);
   const [checkForm, setCheckForm] = useState();
+  
   const history = useHistory();
   const onClickLogin=()=>{
     setCheckForm(FormValidator(data, setData));

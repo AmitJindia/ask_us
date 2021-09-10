@@ -1,5 +1,9 @@
 import { TextField } from '@material-ui/core';
 import React from 'react';
+import IconButton from "@material-ui/core/IconButton";
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import InputAdornment from "@material-ui/core/InputAdornment";
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 
 function Input(props) {
    const {items,onChangeHandler} = props;
@@ -18,11 +22,18 @@ function Input(props) {
         }/>
        case "password":
            return <TextField 
-           fullWidth type="password" 
+           fullWidth type="input" 
            variant="outlined" 
            value={items?.value} 
            onChange={onChangeHandler} 
-           label={items?.label} 
+           label={items?.label}
+           InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <VisibilityIcon onMouseOver={(e)=>{debugger}} />
+              </InputAdornment>
+             )
+            }} 
            error={
             items?.validation?.valid === false &&
             items?.validation?.touched === true
