@@ -1,15 +1,25 @@
-export const form = [
+export const formData = [
     {
         id: "text",
         label: "Email",
         value: "",
         occupency: { xs: 12, md: 12 },
+        validation: {
+            required: true,
+            valid: false,
+            touched: false
+        }
     },
     {
         id: "text",
         label: "Password",
         value: "",
         occupency: { xs: 12, md: 12 },
+        validation: {
+            required: true,
+            valid: false,
+            touched: false
+        }
     }
 ]
 

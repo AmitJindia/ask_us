@@ -6,7 +6,7 @@ function Buttons(props) {
 
     switch (data.variant) {
         case "contained":
-            return <Button variant="contained" color="primary">{data.label}</Button>
+            return <Button variant="contained" onClick={onClick} color="primary">{data.label}</Button>
         case "notContained":
             return <Button color="primary" onClick={onClick} >{data.label}</Button>    
         default:

@@ -1,21 +1,41 @@
-import { Box, Container, Grid, Paper } from "@material-ui/core";
-import React from "react";
+import React, {useState, useEffect  } from "react";
 import { useHistory } from "react-router";
+import { Box, Container, Grid, Paper, useEventCallback } from "@material-ui/core";
 import ButtonGenerator from "../../../Components/ButtonGenerator/ButtonGenerator";
 import FieldGenerator from "../../../Components/FieldGenerator/FieldGenerator";
-import { form, buttonData, buttonData1 } from "./skeleton";
+import { formData, buttonData, buttonData1 } from "./skeleton";
 import GoogleLogin from 'react-google-login';
+import FormValidator from "../../../Components/FormValidator/FormValidator";
 
-function Login(props) {
+const Login=()=> {
+  const [data, setData] = useState(formData);
+  const [dataa, setDataa] = useState(false);
+  const [checkForm, setCheckForm] = useState();
   const history = useHistory();
+  const onClickLogin=()=>{
+    setCheckForm(FormValidator(data, setData));
+    setData(FormValidator(data, setData)?.data);
+        if (FormValidator(data, setData)?.check) {}
+  }
   const onClickHandler = () => {
     history.push("/register")
+  }
+  const onChangeHandler = (e, i) => {
+    const updatedInputData = data;
+    const updatedInputDataElement = updatedInputData[i];
+    updatedInputDataElement.value = e.target.value;
+    updatedInputData[i] = updatedInputDataElement;
+    setData(updatedInputData);
+    setDataa(!dataa);
   }
   return (
     <Container maxWidth="xs">
       <Paper elevation={3}>
         <Box p={3}>
-          <FieldGenerator form={form} />
+          <FieldGenerator
+            form={data}
+            onChangeHandler={onChangeHandler}
+          />
           <span
             style={{
               display: "flex",
@@ -30,7 +50,7 @@ function Login(props) {
               alignItems="center"
             >
               <ButtonGenerator onClick={onClickHandler} data={buttonData1} />
-              <ButtonGenerator data={buttonData} />
+              <ButtonGenerator onClick={onClickLogin} data={buttonData} />
             </Grid>
           </span>
           <span
@@ -47,7 +67,7 @@ function Login(props) {
               // onFailure={responseGoogle}
               cookiePolicy={'single_host_origin'}
             />
-            </span>
+          </span>
         </Box>
       </Paper>
     </Container>

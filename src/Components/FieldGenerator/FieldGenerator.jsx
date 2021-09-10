@@ -2,12 +2,12 @@ import { Grid } from '@material-ui/core';
 import React from 'react';
 import Input from "../Inputs/index";
 
-function FieldGenerator(props) {
-    const { form } = props;
+const FieldGenerator=(props)=> {
+    const { form,onChangeHandler} = props;
     return (
         <Grid container spacing={2} {...props.gridProps}>
-            {form.length
-                ? form.map(items =>
+            {form?.length
+                ? form.map((items,index) =>
                 (
                     <Grid
                         item
@@ -16,6 +16,7 @@ function FieldGenerator(props) {
                     >
                         <Input
                             items={items}
+                            onChangeHandler={(e)=>onChangeHandler(e,index)}
                         />
                     </Grid>
                 )) : null}
