@@ -1,9 +1,29 @@
 import { Grid } from '@material-ui/core';
-import React from 'react';
+import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import Input from "../Inputs/index";
 
-const FieldGenerator=(props)=> {
+const FieldGenerator=forwardRef((props, ref)=> {
     const { form,onChangeHandler} = props;
+    const [inputValue, setInputValue] = useState([]);
+    const onChange = (e, index, type, id) => {
+        if (type === "text" || type === "select" || type === "password") {
+            let multiSelectData = {
+                ...inputValue,
+                [id]: e.target.value,
+            };
+            setInputValue(multiSelectData);
+        }
+        onChangeHandler(e, index)
+    }
+    const handleInsertValues = (data) => {
+        setInputValue(data);
+    }
+    useImperativeHandle(ref, () => {
+        return {
+            getValues: inputValue,
+            setValues: handleInsertValues,
+        };
+    });
     return (
         <Grid container spacing={2} {...props.gridProps}>
             {form?.length
@@ -16,12 +36,12 @@ const FieldGenerator=(props)=> {
                     >
                         <Input
                             items={items}
-                            onChangeHandler={(e)=>onChangeHandler(e,index)}
+                            onChangeHandler={(e, type, id) => onChange(e, index, type, id)}
                         />
                     </Grid>
                 )) : null}
         </Grid>
     );
-}
+})
 
 export default FieldGenerator;

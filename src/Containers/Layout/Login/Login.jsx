@@ -1,4 +1,5 @@
-import React, {useState, useEffect  } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { Box, Container, Grid, Paper, useEventCallback } from "@material-ui/core";
 import ButtonGenerator from "../../../Components/ButtonGenerator/ButtonGenerator";
@@ -6,18 +7,28 @@ import FieldGenerator from "../../../Components/FieldGenerator/FieldGenerator";
 import { formData, buttonData, buttonData1 } from "./skeleton";
 import GoogleLogin from 'react-google-login';
 import FormValidator from "../../../Components/FormValidator/FormValidator";
+import { login, loginSelector } from "../../../store/login";
+import { tokenDecode } from "../../../util/token-decode";
+import { useTemplate } from "../../../context/templateContext";
 
 
-const Login=()=> {
+const Login = () => {
+  const {setLogin,setUserName,setUserEmail,setUserRole } = useTemplate();
   const [data, setData] = useState(formData);
   const [dataa, setDataa] = useState(false);
   const [checkForm, setCheckForm] = useState();
-  
+  const dispatch = useDispatch();
+  const { items, loading, hasErrors } = useSelector(loginSelector)
+  const ref = useRef();
+  const [error,setError]=useState("");
   const history = useHistory();
-  const onClickLogin=()=>{
-    setCheckForm(FormValidator(data, setData));
-    setData(FormValidator(data, setData)?.data);
-        if (FormValidator(data, setData)?.check) {}
+  const onClickLogin = () => {
+    let a = ref.current.getValues
+    dispatch(login(ref.current.getValues));
+    // axios.post("http://localhost:3002/signin",ref.current.getValues)
+    // setCheckForm(FormValidator(data, setData));
+    // setData(FormValidator(data, setData)?.data);
+    //     if (FormValidator(data, setData)?.check) {}
   }
   const onClickHandler = () => {
     history.push("/register")
@@ -30,14 +41,40 @@ const Login=()=> {
     setData(updatedInputData);
     setDataa(!dataa);
   }
+
+  const responseGoogle = (response) => {
+    // axios({
+    //   method:"post",
+    //   url:"http://localhost:3002/googlelogin",
+    //   data:{tokenID:response.tokenId}
+    // }).then(response=>{
+    //   console.log(response)
+    // })
+  }
+  useEffect(async() => {
+    if (items.status === 200) {
+      sessionStorage.setItem("token", items.token)
+      const data = await tokenDecode(items?.token);
+      setLogin(true);
+      setUserEmail(data.email);
+      setUserRole(data?.role);
+      setUserName(data?.name);
+    }
+    if(hasErrors){
+      let a = items
+      setError(items.message)
+    }
+  }, [items])
   return (
     <Container maxWidth="xs">
       <Paper elevation={3}>
         <Box p={3}>
           <FieldGenerator
+            ref={ref}
             form={data}
             onChangeHandler={onChangeHandler}
           />
+          <span style={{color:"red"}}>{error}</span>
           <span
             style={{
               display: "flex",
@@ -65,7 +102,7 @@ const Login=()=> {
             <GoogleLogin
               clientId="337329766423-qn6o3j8jig2l3vprcm93m6n88ho302lj.apps.googleusercontent.com"
               buttonText="Login with Google"
-              // onSuccess={responseGoogle}
+              onSuccess={responseGoogle}
               // onFailure={responseGoogle}
               cookiePolicy={'single_host_origin'}
             />

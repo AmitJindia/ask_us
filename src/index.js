@@ -6,13 +6,17 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 import { MuiThemeProvider } from '@material-ui/core';
 import { customTheme } from "./customTheme";
+import store from "./store/index"
+import { Provider } from 'react-redux'
 
 ReactDOM.render(
   <React.StrictMode>
-     <MuiThemeProvider theme={customTheme}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <MuiThemeProvider theme={customTheme}>
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
     </MuiThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')

@@ -21,11 +21,13 @@ import { useStyles } from "./styles";
 import Routing from '../../Routes/Routing';
 import mainLogo from './logo.png';
 import { useHistory } from 'react-router-dom';
+import { useTemplate } from '../../context/templateContext';
 
 
 
 
 export function Header() {
+    const {loggedin,username}=useTemplate();
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -74,7 +76,8 @@ export function Header() {
                         ANYTIME
                     </Typography>
                     </div>
-                    <Button color="inherit" onClick={onClickHandler}>Login</Button>
+                    {!loggedin && (<Button color="inherit" onClick={onClickHandler}>Login</Button>)}
+                    {loggedin && (<Button color="inherit" >Hi,{username}</Button>)}
                 </Toolbar>
             </AppBar>
             <Drawer
