@@ -26,7 +26,7 @@ function Input(props) {
            value={items?.value} 
             onChange={(e) => {
                         onChangeHandler &&
-                            onChangeHandler(e,items.elementType,items?.label);
+                            onChangeHandler(e,items.elementType,items?.inputName);
                     }} 
            error={
             items?.validation?.valid === false &&
@@ -39,7 +39,7 @@ function Input(props) {
            value={items?.value} 
             onChange={(e) => {
                         onChangeHandler &&
-                            onChangeHandler(e,items.elementType,items?.label);
+                            onChangeHandler(e,items.elementType,items?.inputName);
                     }} 
            label={items?.label}
            InputProps={{

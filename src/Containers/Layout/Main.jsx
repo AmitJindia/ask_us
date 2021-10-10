@@ -2,13 +2,15 @@ import React, { useEffect } from 'react';
 import { useTemplate } from '../../context/templateContext';
 import { tokenDecode } from '../../util/token-decode';
 import { Header } from '../Header/Header';
+import LoadingOverlay from "react-loading-overlay";
+
 
 function Main(props) {
-    const { setLogin, setUserName, setUserEmail, setUserRole } = useTemplate();
+    const { setLogin, setUserName, setUserEmail, setUserRole, loading } = useTemplate();
     let data;
-    if(sessionStorage.getItem("token"))
+    if (sessionStorage.getItem("token"))
         data = tokenDecode(sessionStorage.getItem("token") && (sessionStorage.getItem("token")));
-    
+
     useEffect(() => {
         if (data?.exp * 1000 > new Date().getTime()) {
             setLogin(true);
@@ -19,7 +21,9 @@ function Main(props) {
     }, [data])
     return (
         <div>
+           
             <Header />
+            
         </div>
     );
 }

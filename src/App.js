@@ -2,12 +2,16 @@ import { useState } from 'react';
 import './App.css';
 import Main from './Containers/Layout/Main';
 import { TemplateContext } from "./context/templateContext";
+import LoadingOverlay from "react-loading-overlay";
+
 
 function App() {
   const [loggedin, setLogin] = useState(false);
   const [username, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userRole, setUserRole] = useState("");
+  const [loading, setLoading] = useState(false);
+
 
   return (
     <div className="App" >
@@ -19,9 +23,16 @@ function App() {
         userEmail: userEmail,
         setUserEmail: setUserEmail,
         userRole: userRole,
-        setUserRole: setUserRole
+        setUserRole: setUserRole,
+        loading: loading,
+        setLoading: setLoading
       }}>
-        <Main />
+        <LoadingOverlay
+          active={loading}
+          spinner
+        >
+          <Main />
+        </LoadingOverlay>
       </TemplateContext.Provider>
     </div>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
+import {Drawer,Tooltip} from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
@@ -22,12 +22,13 @@ import Routing from '../../Routes/Routing';
 import mainLogo from './logo.png';
 import { useHistory } from 'react-router-dom';
 import { useTemplate } from '../../context/templateContext';
+import { NavMenu } from './skeleton';
 
 
 
 
 export function Header() {
-    const {loggedin,username}=useTemplate();
+    const { loggedin, username } = useTemplate();
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -38,10 +39,16 @@ export function Header() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
-    const history= useHistory();
+    const history = useHistory();
 
-    const onClickHandler=()=>{
+    const onClickHandler = () => {
         history.push("/login")
+    }
+    const onMenuClickHandler = (e,url)=>{
+
+        history.push(url)
+        let a = e
+        debugger
     }
 
     return (
@@ -53,7 +60,7 @@ export function Header() {
                     [classes.appBarShift]: open,
                 })}
                 elevation={2}
-                // style={{ background: "#000" }}
+            // style={{ background: "#000" }}
             >
                 <Toolbar>
                     <IconButton
@@ -64,17 +71,17 @@ export function Header() {
                         className={clsx(classes.menuButton, {
                             [classes.hide]: open,
                         })}
-                        // style={{ color: "#fede5c" }}
+                    // style={{ color: "#fede5c" }}
                     >
                         <MenuIcon />
                     </IconButton>
-                    <div style={{display:"flex",flexGrow:"1"}}>
-                    <Typography variant="h6" noWrap style={{ color: "#fff", fontFamily: "Verdana, Arial, Helvetica, sans-serif", letterSpacing: "3px" }} >
-                        ASKUS&nbsp;
-                    </Typography>
-                    <Typography variant="h6" style={{ color: "#0076b5", backgroundColor: "#fff", fontFamily: "Verdana, Arial, Helvetica, sans-serif", letterSpacing: "3px" }} >
-                        ANYTIME
-                    </Typography>
+                    <div style={{ display: "flex", flexGrow: "1" }}>
+                        <Typography variant="h6" noWrap style={{ color: "#fff", fontFamily: "Verdana, Arial, Helvetica, sans-serif", letterSpacing: "3px" }} >
+                            ASKUS&nbsp;
+                        </Typography>
+                        <Typography variant="h6" style={{ color: "#0076b5", backgroundColor: "#fff", fontFamily: "Verdana, Arial, Helvetica, sans-serif", letterSpacing: "3px" }} >
+                            ANYTIME
+                        </Typography>
                     </div>
                     {!loggedin && (<Button color="inherit" onClick={onClickHandler}>Login</Button>)}
                     {loggedin && (<Button color="inherit" >Hi,{username}</Button>)}
@@ -100,12 +107,25 @@ export function Header() {
                 </div>
                 <Divider />
                 <List>
-                    {['Home', 'About Us', 'Contact Us', 'Careers', 'Quiz', 'FAQ'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
+                    {NavMenu.map(
+                        ({ text, icon: Icon,routing, active }, index) => (
+                            <Tooltip title={text}>
+                                <ListItem
+                                    button
+                                    key={text}
+                                    className="list"
+                                    // selected={active}
+                                    onClick={(e) => {
+                                        onMenuClickHandler(e,routing);
+                                    }}
+                                >
+                                    <ListItemIcon>
+                                        <Icon />
+                                    </ListItemIcon>
+                                    <ListItemText primary={text} />
+                                </ListItem>
+                            </Tooltip>
+                        ))}
                 </List>
             </Drawer>
             <main className={classes.content}>

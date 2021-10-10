@@ -13,22 +13,21 @@ import { useTemplate } from "../../../context/templateContext";
 
 
 const Login = () => {
-  const {setLogin,setUserName,setUserEmail,setUserRole } = useTemplate();
+  const { setLogin, setUserName, setUserEmail, setUserRole,setLoading } = useTemplate();
   const [data, setData] = useState(formData);
   const [dataa, setDataa] = useState(false);
   const [checkForm, setCheckForm] = useState();
   const dispatch = useDispatch();
   const { items, loading, hasErrors } = useSelector(loginSelector)
   const ref = useRef();
-  const [error,setError]=useState("");
+  const [error, setError] = useState("");
   const history = useHistory();
   const onClickLogin = () => {
-    let a = ref.current.getValues
-    dispatch(login(ref.current.getValues));
-    // axios.post("http://localhost:3002/signin",ref.current.getValues)
-    // setCheckForm(FormValidator(data, setData));
-    // setData(FormValidator(data, setData)?.data);
-    //     if (FormValidator(data, setData)?.check) {}
+    setCheckForm(FormValidator(data, setData));
+    setData(FormValidator(data, setData)?.data);
+    if (FormValidator(data, setData)?.check) {
+      dispatch(login(ref.current.getValues));
+    }
   }
   const onClickHandler = () => {
     history.push("/register")
@@ -51,7 +50,7 @@ const Login = () => {
     //   console.log(response)
     // })
   }
-  useEffect(async() => {
+  useEffect(async () => {
     if (items.status === 200) {
       sessionStorage.setItem("token", items.token)
       const data = await tokenDecode(items?.token);
@@ -60,11 +59,13 @@ const Login = () => {
       setUserRole(data?.role);
       setUserName(data?.name);
     }
-    if(hasErrors){
-      let a = items
+    if (hasErrors) {
       setError(items.message)
     }
   }, [items])
+  useEffect(()=>{
+    setLoading(loading)
+  },[loading])
   return (
     <Container maxWidth="xs">
       <Paper elevation={3}>
@@ -74,7 +75,7 @@ const Login = () => {
             form={data}
             onChangeHandler={onChangeHandler}
           />
-          <span style={{color:"red"}}>{error}</span>
+          <span style={{ color: "red" }}>{error}</span>
           <span
             style={{
               display: "flex",

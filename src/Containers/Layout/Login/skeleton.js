@@ -3,6 +3,7 @@ export const formData = [
         id: "text",
         elementType:"text",
         label: "Email",
+        inputName:"Email",
         value: "",
         occupency: { xs: 12, md: 12 },
         validation: {
@@ -16,6 +17,7 @@ export const formData = [
         id: "password",
         elementType:"password",
         label: "Password",
+        inputName: "Password",
         value: "",
         occupency: { xs: 12, md: 12 },
         validation: {
