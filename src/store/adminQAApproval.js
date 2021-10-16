@@ -8,50 +8,51 @@ export const initialState = {
   items: [],
 }
 
-const querySlice = createSlice({
-  name: "query",
+const adminApprovalQuerySlice = createSlice({
+  name: "adminApprovalQuery",
   initialState,
   reducers: {
-    getQuery: state => {
+    getAdminApprovalQuery: state => {
       state.loading = true
     },
-    getQuerySuccess: (state, action) => {
+    getAdminApprovalQuerySuccess: (state, action) => {
       state.items = action.payload
       state.loading = false
       state.hasErrors = false
     },
-    getQueryFailure: (state, action) => {
+    getAdminApprovalQueryFailure: (state, action) => {
       state.items = action.payload
       state.loading = false
       state.hasErrors = true
     },
   }
 })
-export const { getQuery, getQuerySuccess, getQueryFailure } = querySlice.actions;
+export const { getAdminApprovalQuery, getAdminApprovalQuerySuccess, getAdminApprovalQueryFailure } = adminApprovalQuerySlice.actions;
 
-export const querySelector = state => state.query
+export const adminapprovalQuerySelector = state => state.adminApproval
 
-export default querySlice.reducer;
+export default adminApprovalQuerySlice.reducer;
 
-export function query(value) {
+export function adminapprovalQuery(value) {
+  debugger
   return async dispatch => {
-    dispatch(getQuery())
+    dispatch(getAdminApprovalQuery())
     try {
       const headers = {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${sessionStorage.getItem("token")}`
       }
-      const response = await axios.post(`http://localhost:3002/postQuery`, value,{
+      const response = await axios.post(`http://localhost:3002/approveAnswer`, value,{
         headers: headers
       })
       let data = await response.data
       data = { ...data, status: response.status }
-      dispatch(getQuerySuccess(data))
+      dispatch(getAdminApprovalQuerySuccess(data))
     } catch (error) {
       if (error.response) {
         let data = (error.response.data);
         data = { ...data, status: error.response.status }
-        dispatch(getQueryFailure(data))
+        dispatch(getAdminApprovalQueryFailure(data))
       }
     }
   }

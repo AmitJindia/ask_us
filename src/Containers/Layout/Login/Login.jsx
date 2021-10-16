@@ -58,6 +58,7 @@ const Login = () => {
       setUserEmail(data.email);
       setUserRole(data?.role);
       setUserName(data?.name);
+      history.push("/")
     }
     if (hasErrors) {
       setError(items.message)

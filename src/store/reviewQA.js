@@ -8,50 +8,51 @@ export const initialState = {
   items: [],
 }
 
-const querySlice = createSlice({
-  name: "query",
+const reviewSlice = createSlice({
+  name: "review",
   initialState,
   reducers: {
-    getQuery: state => {
+    getReview: state => {
       state.loading = true
     },
-    getQuerySuccess: (state, action) => {
+    getReviewSuccess: (state, action) => {
       state.items = action.payload
       state.loading = false
       state.hasErrors = false
     },
-    getQueryFailure: (state, action) => {
+    getReviewFailure: (state, action) => {
       state.items = action.payload
       state.loading = false
       state.hasErrors = true
     },
   }
 })
-export const { getQuery, getQuerySuccess, getQueryFailure } = querySlice.actions;
+export const { getReview, getReviewSuccess, getReviewFailure } = reviewSlice.actions;
 
-export const querySelector = state => state.query
+export const reviewSelector = state => state.review
 
-export default querySlice.reducer;
+export default reviewSlice.reducer;
 
-export function query(value) {
+export function review(value) {
+  debugger
   return async dispatch => {
-    dispatch(getQuery())
+    dispatch(getReview())
     try {
       const headers = {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${sessionStorage.getItem("token")}`
       }
-      const response = await axios.post(`http://localhost:3002/postQuery`, value,{
+      const response = await axios.post(`http://localhost:3002/reviewAnswer`, value,{
         headers: headers
       })
       let data = await response.data
       data = { ...data, status: response.status }
-      dispatch(getQuerySuccess(data))
+      dispatch(getReviewSuccess(data))
     } catch (error) {
       if (error.response) {
         let data = (error.response.data);
         data = { ...data, status: error.response.status }
-        dispatch(getQueryFailure(data))
+        dispatch(getReviewFailure(data))
       }
     }
   }

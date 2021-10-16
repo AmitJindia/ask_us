@@ -10,7 +10,7 @@ export const formData = [
             required: true,
             valid: false,
             touched: false,
-            email: true
+            // email: true
         }
     },
     {

@@ -8,50 +8,50 @@ export const initialState = {
   items: [],
 }
 
-const querySlice = createSlice({
-  name: "query",
+const postAnswerSlice = createSlice({
+  name: "postAnswer",
   initialState,
   reducers: {
-    getQuery: state => {
+    getPostAnswer: state => {
       state.loading = true
     },
-    getQuerySuccess: (state, action) => {
+    getPostAnswerSuccess: (state, action) => {
       state.items = action.payload
       state.loading = false
       state.hasErrors = false
     },
-    getQueryFailure: (state, action) => {
+    getPostAnswerFailure: (state, action) => {
       state.items = action.payload
       state.loading = false
       state.hasErrors = true
     },
   }
 })
-export const { getQuery, getQuerySuccess, getQueryFailure } = querySlice.actions;
+export const { getPostAnswer, getPostAnswerSuccess, getPostAnswerFailure } = postAnswerSlice.actions;
 
-export const querySelector = state => state.query
+export const postAnswerSelector = state => state.postAnswer
 
-export default querySlice.reducer;
+export default postAnswerSlice.reducer;
 
-export function query(value) {
+export function postAnswer(value) {
   return async dispatch => {
-    dispatch(getQuery())
+    dispatch(getPostAnswer())
     try {
       const headers = {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${sessionStorage.getItem("token")}`
       }
-      const response = await axios.post(`http://localhost:3002/postQuery`, value,{
+      const response = await axios.post(`http://localhost:3002/postAnswer`, value,{
         headers: headers
       })
       let data = await response.data
       data = { ...data, status: response.status }
-      dispatch(getQuerySuccess(data))
+      dispatch(getPostAnswerSuccess(data))
     } catch (error) {
       if (error.response) {
         let data = (error.response.data);
         data = { ...data, status: error.response.status }
-        dispatch(getQueryFailure(data))
+        dispatch(getPostAnswerFailure(data))
       }
     }
   }

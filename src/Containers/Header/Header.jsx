@@ -45,10 +45,7 @@ export function Header() {
         history.push("/login")
     }
     const onMenuClickHandler = (e,url)=>{
-
         history.push(url)
-        let a = e
-        debugger
     }
 
     return (

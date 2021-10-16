@@ -8,50 +8,50 @@ export const initialState = {
   items: [],
 }
 
-const querySlice = createSlice({
-  name: "query",
+const acceptQuerySlice = createSlice({
+  name: "acceptQuery",
   initialState,
   reducers: {
-    getQuery: state => {
+    getAcceptQuery: state => {
       state.loading = true
     },
-    getQuerySuccess: (state, action) => {
+    getAcceptQuerySuccess: (state, action) => {
       state.items = action.payload
       state.loading = false
       state.hasErrors = false
     },
-    getQueryFailure: (state, action) => {
+    getAcceptQueryFailure: (state, action) => {
       state.items = action.payload
       state.loading = false
       state.hasErrors = true
     },
   }
 })
-export const { getQuery, getQuerySuccess, getQueryFailure } = querySlice.actions;
+export const { getAcceptQuery, getAcceptQuerySuccess, getAcceptQueryFailure } = acceptQuerySlice.actions;
 
-export const querySelector = state => state.query
+export const acceptQuerySelector = state => state.acceptQuery
 
-export default querySlice.reducer;
+export default acceptQuerySlice.reducer;
 
-export function query(value) {
+export function acceptQuery(value) {
   return async dispatch => {
-    dispatch(getQuery())
+    dispatch(getAcceptQuery())
     try {
       const headers = {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${sessionStorage.getItem("token")}`
       }
-      const response = await axios.post(`http://localhost:3002/postQuery`, value,{
+      const response = await axios.post(`http://localhost:3002/acceptQuestion`, value,{
         headers: headers
       })
       let data = await response.data
       data = { ...data, status: response.status }
-      dispatch(getQuerySuccess(data))
+      dispatch(getAcceptQuerySuccess(data))
     } catch (error) {
       if (error.response) {
         let data = (error.response.data);
         data = { ...data, status: error.response.status }
-        dispatch(getQueryFailure(data))
+        dispatch(getAcceptQueryFailure(data))
       }
     }
   }

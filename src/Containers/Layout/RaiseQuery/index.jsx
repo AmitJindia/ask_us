@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { Box, Container, Grid, Paper, useEventCallback } from "@material-ui/core";
+import { Box, Container, Grid, Paper, Typography } from "@material-ui/core";
 import ButtonGenerator from "../../../Components/ButtonGenerator/ButtonGenerator";
 import FieldGenerator from "../../../Components/FieldGenerator/FieldGenerator";
 import { formData, buttonData, buttonData1 } from "./skeleton";
@@ -62,7 +62,17 @@ const Query = () => {
   },[loading])
   return (
     <Container maxWidth="xl">
-      <Paper elevation={3}>
+       <Paper
+            elevation={3}
+            className="paper-rounded"
+            style={{ backgroundColor: "#faf7f7" }}
+            style={{ marginTop: "20px" }}
+        >
+            <Box style={{ marginLeft: "22px", paddingTop: "10px", paddingBottom: "10px" }}>
+                <Typography variant="h6">Raise Query</Typography>
+            </Box>
+        </Paper>
+            <Paper elevation={3} className="paper-rounded">
         <Box p={3}>
           <FieldGenerator
             ref={ref}

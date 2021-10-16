@@ -7,6 +7,9 @@ import Login from "../Containers/Layout/Login/Login"
 import Register from '../Containers/Layout/Register/Register';
 import VerifyUser from "../Containers/VerifyUser";
 import Query from "../Containers/Layout/RaiseQuery/index";
+import ResolveQuery from '../Containers/Layout/QueryScreens/ResolveQuery';
+import ReviewQA from '../Containers/Layout/QueryScreens/Review_QA';
+import ApprovalTabs from '../Containers/Layout/QueryScreens/AdminApproval';
 
 function Routing(props) {
 
@@ -18,6 +21,10 @@ function Routing(props) {
             <Route path="/register" component={Register} />
             <Route path="/contact_us" component={Contact} />
             <Route path="/raise_query" component={Query} />
+            <Route path="/resolve_query" component={ResolveQuery} />
+            <Route path="/reviewQA" component={ReviewQA} />
+            <Route path="/approveQA" component={ApprovalTabs} />
+            
             <Route path="/verifyUser/:code" component={VerifyUser} />
             <Route path="/" component={Layout} />
 
