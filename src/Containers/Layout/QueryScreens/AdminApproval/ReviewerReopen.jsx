@@ -38,7 +38,7 @@ const ReviewerReopen = () => {
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
         // if (isExpanded) {
-        //     axios.get(`http://localhost:3002/getAnswers/${panel}`, {
+        //     axios.get(`https://askus-servic-main-aegoakmtmi7q.herokuapp.com/getAnswers/${panel}`, {
         //         headers: headers
         //     }).then(res => res)
         //         .then(data => {
@@ -49,7 +49,7 @@ const ReviewerReopen = () => {
 
     };
     useEffect(() => {
-        axios.get(`http://localhost:3002/getReviewReopenQA`, {
+        axios.get(`https://askus-servic-main-aegoakmtmi7q.herokuapp.com/getReviewReopenQA`, {
             headers: headers
         }).then(res => res)
             .then(data => {

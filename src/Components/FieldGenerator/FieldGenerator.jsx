@@ -11,6 +11,7 @@ const FieldGenerator=forwardRef((props, ref)=> {
                 ...inputValue,
                 [id]: e.target.value,
             };
+            debugger
             setInputValue(multiSelectData);
         }
         onChangeHandler(e, index)

@@ -42,7 +42,7 @@ export function adminapprovalQuery(value) {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${sessionStorage.getItem("token")}`
       }
-      const response = await axios.post(`http://localhost:3002/approveAnswer`, value,{
+      const response = await axios.post(`https://askus-servic-main-aegoakmtmi7q.herokuapp.com/approveAnswer`, value,{
         headers: headers
       })
       let data = await response.data

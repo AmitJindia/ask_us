@@ -37,7 +37,7 @@ export function register(value) {
   return async dispatch => {
     dispatch(getRegister())
     try {
-      const response = await axios.post(`http://localhost:3002/signup`, value)
+      const response = await axios.post(`https://askus-servic-main-aegoakmtmi7q.herokuapp.com/signup`, value)
       let data = await response.data
       data = { ...data, status: response.status }
       dispatch(getRegisterSuccess(data))

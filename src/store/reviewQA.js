@@ -42,7 +42,7 @@ export function review(value) {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${sessionStorage.getItem("token")}`
       }
-      const response = await axios.post(`http://localhost:3002/reviewAnswer`, value,{
+      const response = await axios.post(`https://askus-servic-main-aegoakmtmi7q.herokuapp.com/reviewAnswer`, value,{
         headers: headers
       })
       let data = await response.data

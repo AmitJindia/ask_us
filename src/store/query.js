@@ -41,7 +41,7 @@ export function query(value) {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${sessionStorage.getItem("token")}`
       }
-      const response = await axios.post(`http://localhost:3002/postQuery`, value,{
+      const response = await axios.post(`https://askus-servic-main-aegoakmtmi7q.herokuapp.com/postQuery`, value,{
         headers: headers
       })
       let data = await response.data

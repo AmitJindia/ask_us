@@ -8,7 +8,7 @@ function VerifyUser(props) {
     const { code } = useParams();
     useEffect(() => {
         if (code) {
-            axios.get(`http://localhost:3002/verifyUser/${code}`).then(function (response) {
+            axios.get(`https://askus-servic-main-aegoakmtmi7q.herokuapp.com/verifyUser/${code}`).then(function (response) {
                 setState(response?.data.message);
             })
                 .catch(function (error) {

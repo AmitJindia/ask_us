@@ -35,6 +35,7 @@ const Q_A = (props) => {
     setData(FormValidator(data, setData)?.data);
     if (FormValidator(data, setData)?.check) {
       let formdata = ref.current.getValues
+      debugger
       formdata.qID = values.qID;
       formdata.submittedBy = userEmail;
       formdata.submittedOn = new Date();

@@ -18,7 +18,6 @@ export const buttonData =
 {
     variant: "contained",
     label: "Submit"
-
 }
 
 

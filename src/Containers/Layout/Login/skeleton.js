@@ -10,7 +10,7 @@ export const formData = [
             required: true,
             valid: false,
             touched: false,
-            // email: true
+            email: true
         }
     },
     {
@@ -23,7 +23,8 @@ export const formData = [
         validation: {
             required: true,
             valid: false,
-            touched: false
+            touched: false,
+            password:true
         }
     }
 ]

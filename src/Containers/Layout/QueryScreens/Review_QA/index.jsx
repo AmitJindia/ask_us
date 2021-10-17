@@ -37,7 +37,7 @@ const ReviewQA = () => {
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
         if (isExpanded) {
-            axios.get(`http://localhost:3002/getAnswers/${panel}`, {
+            axios.get(`https://askus-servic-main-aegoakmtmi7q.herokuapp.com/getAnswers/${panel}`, {
                 headers: headers
             }).then(res => res)
                 .then(data => {
@@ -48,7 +48,7 @@ const ReviewQA = () => {
 
     };
     useEffect(() => {
-        axios.get(`http://localhost:3002/getQAForReview`, {
+        axios.get(`https://askus-servic-main-aegoakmtmi7q.herokuapp.com/getQAForReview`, {
             headers: headers
         }).then(res => res)
             .then(data => {

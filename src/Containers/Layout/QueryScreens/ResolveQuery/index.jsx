@@ -31,14 +31,14 @@ const ResolveQuery = () => {
         'Authorization': `Bearer ${sessionStorage.getItem("token")}`
     }
     useEffect(() => {
-        axios.get(`http://localhost:3002/getNewQueries`, {
+        axios.get(`https://askus-servic-main-aegoakmtmi7q.herokuapp.com/getNewQueries`, {
             headers: headers
         }).then(res => res)
             .then(data => {
                 setGetData(data.data.response);
             })
             .catch(error => console.log(error));
-        axios.get(`http://localhost:3002/getUserAcceptedQueries`, {
+        axios.get(`https://askus-servic-main-aegoakmtmi7q.herokuapp.com/getUserAcceptedQueries`, {
             headers: headers
         }).then(res => res)
             .then(data => {

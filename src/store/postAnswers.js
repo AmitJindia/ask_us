@@ -34,6 +34,7 @@ export const postAnswerSelector = state => state.postAnswer
 export default postAnswerSlice.reducer;
 
 export function postAnswer(value) {
+  debugger
   return async dispatch => {
     dispatch(getPostAnswer())
     try {
@@ -41,7 +42,7 @@ export function postAnswer(value) {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${sessionStorage.getItem("token")}`
       }
-      const response = await axios.post(`http://localhost:3002/postAnswer`, value,{
+      const response = await axios.post(`https://askus-servic-main-aegoakmtmi7q.herokuapp.com/postAnswer`, value,{
         headers: headers
       })
       let data = await response.data
